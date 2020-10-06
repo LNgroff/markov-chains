@@ -42,16 +42,19 @@ def make_chains(text_string):
     chains = {}
 
     # Tokenize text
-    tokenized_text = text_string.split() # Returns [word1, word2, word3]
+    tokens = text_string.split()  # Returns [word1, word2, word3]
+
+    # Assign macro for tuple-formatted key
+    bigram = '(tokens[i], tokens[i + 1])'
 
     # Loop through tokenized text and track pairs of words
-    for i in range(len(tokenized_text) - 2):
-        chains[(tokenized_text[i], tokenized_text[i + 1])] = []
+    for i in range(len(tokens) - 2):
+        chains[eval(bigram)] = []
 
     # Loop through the keys in chain and if match, add following word to list as key-value
-    for i in range(len(tokenized_text) - 1):
-        if (tokenized_text[i], tokenized_text[i + 1]) in chains.keys():
-            chains[(tokenized_text[i], tokenized_text[i + 1])].append(tokenized_text[i + 2])
+    for i in range(len(tokens) - 1):
+        if eval(bigram) in chains.keys():
+            chains[eval(bigram)].append(tokens[i + 2])
 
     return chains
 
@@ -61,7 +64,22 @@ def make_text(chains):
 
     words = []
 
-    # your code goes here
+    # Return random key
+    # random_key = choice(chains)
+
+    # Continue to loop through unless there is a Error
+    # while True:
+    #     try:
+    #         pass
+    #     except:
+    #         break
+
+    # While loop should break when "I am?" cannot be found in dict
+
+    # Deconstructs the key token
+    # word1, word2 = random_key
+
+
 
     return ' '.join(words)
 
