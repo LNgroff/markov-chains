@@ -65,21 +65,28 @@ def make_text(chains):
     words = []
 
     # Return random key
-    # random_key = choice(chains)
+    random_key = choice(list(chains))
 
-    # Continue to loop through unless there is a Error
-    # while True:
-    #     try:
-    #         pass
-    #     except:
-    #         break
+    # Destructure and append the beginning words to word list
+    words1, words2 = random_key
+    words.append(words1)
+    words.append(words2)
 
-    # While loop should break when "I am?" cannot be found in dict
+    # Initialize bigram lookup with random key
+    bigram_lookup = chains.get(random_key) # Returns list of probable next words or None
 
-    # Deconstructs the key token
-    # word1, word2 = random_key
+    next_bigram = '(words[-2], words[-1])'
 
+    # Continue to loop until .get() returns None
+    while True:
+        # Add the next bigram to eval
+        if bigram_lookup:
+            words.append(choice(bigram_lookup))
 
+            # Reassigns bigram for the next loop
+            bigram_lookup = chains.get(eval(next_bigram))
+        else:
+            break
 
     return ' '.join(words)
 
