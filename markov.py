@@ -41,7 +41,17 @@ def make_chains(text_string):
 
     chains = {}
 
-    
+    # Tokenize text
+    tokenized_text = text_string.split() # Returns [word1, word2, word3]
+
+    # Loop through tokenized text and track pairs of words
+    for i in range(len(tokenized_text) - 2):
+        chains[(tokenized_text[i], tokenized_text[i + 1])] = []
+
+    # Loop through the keys in chain and if match, add following word to list as key-value
+    for i in range(len(tokenized_text) - 1):
+        if (tokenized_text[i], tokenized_text[i + 1]) in chains.keys():
+            chains[(tokenized_text[i], tokenized_text[i + 1])].append(tokenized_text[i + 2])
 
     return chains
 
