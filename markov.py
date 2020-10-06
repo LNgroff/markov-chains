@@ -1,6 +1,7 @@
 """Generate Markov text from text files."""
 
 from random import choice
+from sys import argv
 
 
 def open_and_read_file(file_path):
@@ -73,8 +74,7 @@ def make_text(chains):
     words.append(words2)
 
     # Initialize bigram lookup with random key
-    bigram_lookup = chains.get(random_key) # Returns list of probable next words or None
-
+    bigram_lookup = chains.get(random_key)  # Returns list of probable next words or None
     next_bigram = '(words[-2], words[-1])'
 
     # Continue to loop until .get() returns None
@@ -91,7 +91,7 @@ def make_text(chains):
     return ' '.join(words)
 
 
-input_path = 'green-eggs.txt'
+input_path = argv[1]
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
