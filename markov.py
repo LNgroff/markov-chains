@@ -65,8 +65,18 @@ def make_text(chains):
 
     words = []
 
+    is_capitalized = False
+
     # Return random key
     random_key = choice(list(chains))
+
+    # Check if capitalized, if not, loop to find another key
+    while is_capitalized == False:
+        words1, words2 = random_key
+        if words1[0].isupper():
+            is_capitalized = True 
+        else:
+            random_key = choice(list(chains))
 
     # Destructure and append the beginning words to word list
     words1, words2 = random_key
@@ -78,15 +88,11 @@ def make_text(chains):
     next_bigram = '(words[-2], words[-1])'
 
     # Continue to loop until .get() returns None
-    while True:
-        # Add the next bigram to eval
-        if bigram_lookup:
-            words.append(choice(bigram_lookup))
+    while bigram_lookup:
+        words.append(choice(bigram_lookup))
 
-            # Reassigns bigram for the next loop
-            bigram_lookup = chains.get(eval(next_bigram))
-        else:
-            break
+        # Reassigns bigram for the next loop
+        bigram_lookup = chains.get(eval(next_bigram))
 
     return ' '.join(words)
 
